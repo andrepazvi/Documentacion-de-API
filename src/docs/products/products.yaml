@@ -1,0 +1,163 @@
+
+#/* /src/docs/products/products.yaml */
+
+paths:
+  /api/products:
+    get:
+      summary: Obtener todos los productos
+      tags:
+        - Products
+      description: Obtiene una lista de todos los Products disponibles.
+      responses:
+        '200':
+          description: Respuesta exitosa
+          content:
+            application/json:
+              example:
+                status: success
+                payload: []
+        '500':
+          description: Error interno del servidor
+
+    post:
+      summary: Agregar un nuevo producto
+      tags:
+        - Products
+      description: Agrega un nuevo producto al sistema.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              title: Nombre del Producto
+              description: Descripción del Producto
+              code: Código del Producto
+              price: 99.99
+              stock: 100
+              category: Categoría del Producto
+      responses:
+        '201':
+          description: Producto creado exitosamente
+          content:
+            application/json:
+              example:
+                status: success
+                payload:
+                  _id: ProductoID
+                  title: Nombre del Producto
+                  description: Descripción del Producto
+                  code: Código del Producto
+                  price: 99.99
+                  stock: 100
+                  category: Categoría del Producto
+        '400':
+          description: Solicitud incorrecta
+        '500':
+          description: Error interno del servidor
+
+  /api/products/{productId}:
+    get:
+      summary: Obtener un producto por ID
+      tags:
+        - Products
+      description: Obtiene un producto específico por su ID.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID del producto
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Respuesta exitosa
+          content:
+            application/json:
+              example:
+                status: success
+                payload:
+                  _id: ProductoID
+                  title: Nombre del Producto
+                  description: Descripción del Producto
+                  code: Código del Producto
+                  price: 99.99
+                  stock: 100
+                  category: Categoría del Producto
+        '404':
+          description: Producto no encontrado
+        '500':
+          description: Error interno del servidor
+
+    put:
+      summary: Actualizar un producto por ID
+      tags:
+        - Products
+      description: Actualiza un producto específico por su ID.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID del producto
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              title: Nuevo Nombre del Producto
+              description: Nueva Descripción del Producto
+              price: 129.99
+      responses:
+        '200':
+          description: Producto actualizado exitosamente
+          content:
+            application/json:
+              example:
+                status: success
+                payload:
+                  _id: ProductoID
+                  title: Nuevo Nombre del Producto
+                  description: Nueva Descripción del Producto
+                  code: Código del Producto
+                  price: 129.99
+                  stock: 100
+                  category: Categoría del Producto
+        '400':
+          description: Solicitud incorrecta
+        '404':
+          description: Producto no encontrado
+        '500':
+          description: Error interno del servidor
+
+    delete:
+      summary: Eliminar un producto por ID
+      tags:
+        - Products
+      description: Elimina un producto específico por su ID.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID del producto
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Producto eliminado exitosamente
+          content:
+            application/json:
+              example:
+                status: success
+                payload:
+                  _id: ProductoID
+                  title: Nombre del Producto
+                  description: Descripción del Producto
+                  code: Código del Producto
+                  price: 99.99
+                  stock: 100
+                  category: Categoría del Producto
+        '404':
+          description: Producto no encontrado
+        '500':
+          description: Error interno del servidor
